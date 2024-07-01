@@ -14,7 +14,7 @@ public class CartItem extends Item {
     @Column(name = "cart_item_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "cart_id", referencedColumnName = "cart_id")
     @JsonIgnore
     @ToString.Exclude

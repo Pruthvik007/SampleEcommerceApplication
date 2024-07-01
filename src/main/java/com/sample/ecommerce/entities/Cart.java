@@ -18,7 +18,7 @@ public class Cart {
     @Column(name = "cart_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     @JsonIgnore
     @ToString.Exclude

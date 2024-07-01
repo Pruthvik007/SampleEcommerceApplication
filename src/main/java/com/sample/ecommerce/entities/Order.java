@@ -19,15 +19,17 @@ public class Order {
     private Long id;
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<OrderItem> orderItems;
+    @Column(nullable = false)
     private Double totalPrice;
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     @JsonIgnore
     @ToString.Exclude
     private User user;
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "shipping_address_id", referencedColumnName = "address_id", nullable = false)
     private Address shippingAddress;
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     @Setter
     private OrderStatus status;

@@ -23,24 +23,39 @@ public class User implements UserDetails {
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, length = 20)
     private String name;
+
+    @Column(nullable = false, length = 30)
     private String email;
+
     @JsonIgnore
     @ToString.Exclude
+    @Column(nullable = false)
     private String password;
+
+    @Column(length = 10)
     private String phone;
+
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     @Setter
     private UserStatus status;
+
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user", orphanRemoval = true)
     @ToString.Exclude
     private List<Address> addresses;
+
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user")
     @ToString.Exclude
     @Setter
     private Cart cart;
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user", orphanRemoval = true)
     @ToString.Exclude
     private List<Order> orders;

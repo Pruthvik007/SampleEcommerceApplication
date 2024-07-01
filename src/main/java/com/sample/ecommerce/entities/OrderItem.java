@@ -17,7 +17,7 @@ public class OrderItem extends Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_item_id")
     private Long id;
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "order_id", referencedColumnName = "order_id")
     @JsonIgnore
     @ToString.Exclude

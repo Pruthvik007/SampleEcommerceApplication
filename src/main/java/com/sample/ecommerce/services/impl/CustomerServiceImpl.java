@@ -13,8 +13,6 @@ import com.sample.ecommerce.repositories.*;
 import com.sample.ecommerce.services.CustomerService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -25,21 +23,18 @@ import java.util.*;
 @Service
 @RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
-    private static final Logger log = LoggerFactory.getLogger(CustomerServiceImpl.class);
+
     private final AddressRepository addressRepository;
     private final CartRepository cartRepository;
     private final OrderRepository orderRepository;
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
 
+    @Transactional
     @Override
-    public Address addAddress(AddressDto addressDto) throws UserException {
-        String errorMessage = BeanValidator.isValidAddressDetails(addressDto);
-        if (errorMessage != null) {
-            throw new UserException(errorMessage);
-        }
+    public Address addAddress(AddressDto addressDto) {
         User loggedInUser = getLoggedInUser();
-        Address address = new Address(addressDto.getTitle(), addressDto.getAddress(), addressDto.getCity(), addressDto.getState(), addressDto.getCountry(), addressDto.getZip());
+        Address address = new Address(addressDto.getTitle(), addressDto.getStreet(), addressDto.getCity(), addressDto.getState(), addressDto.getCountry(), addressDto.getZip());
         address.setUser(loggedInUser);
         return addressRepository.save(address);
     }
@@ -76,6 +71,7 @@ public class CustomerServiceImpl implements CustomerService {
         return orderRepository.save(order);
     }
 
+    @Transactional
     @Override
     public Order cancelOrder(Long orderId) throws OrderException {
         Optional<Order> order = orderRepository.findById(orderId);

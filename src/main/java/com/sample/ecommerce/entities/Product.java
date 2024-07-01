@@ -19,10 +19,19 @@ public class Product {
     @Column(name = "product_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, length = 20)
     private String name;
+
+    @Column(nullable = false, length = 200)
     private String description;
+
+    @Column(nullable = false)
     private Double price;
+
+    @Column(nullable = false)
     private String image;
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "product_category",

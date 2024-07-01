@@ -8,7 +8,6 @@ import com.sample.ecommerce.entities.Category;
 import com.sample.ecommerce.entities.Product;
 import com.sample.ecommerce.exceptions.CategoryException;
 import com.sample.ecommerce.exceptions.ProductException;
-import com.sample.ecommerce.helpers.BeanValidator;
 import com.sample.ecommerce.repositories.CategoryRepository;
 import com.sample.ecommerce.repositories.ProductRepository;
 import com.sample.ecommerce.services.EmployeeService;
@@ -20,48 +19,32 @@ import java.util.*;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class EmployeeServiceImpl implements EmployeeService {
+
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
 
-    @Transactional
     @Override
-    public Product createProduct(ProductCreateDto productCreateDto) throws CategoryException, ProductException {
-        String errorMessage = BeanValidator.isValidProductDetails(productCreateDto);
-        if (errorMessage != null) {
-            throw new ProductException(errorMessage);
-        }
+    public Product createProduct(ProductCreateDto productCreateDto) throws CategoryException {
         Set<Category> categories = validateCategories(productCreateDto.getCategoryIds());
         return productRepository.save(new Product(productCreateDto.getName(), productCreateDto.getDescription(), productCreateDto.getPrice(), productCreateDto.getImage(), categories));
     }
 
-    @Transactional
     @Override
     public Product updateProduct(ProductUpdateDto productUpdateDto) throws ProductException, CategoryException {
-        String errorMessage = BeanValidator.isValidProductDetails(productUpdateDto);
-        if (errorMessage != null) {
-            throw new ProductException(errorMessage);
-        }
         Product product = validateProduct(productUpdateDto.getId());
         Set<Category> categories = validateCategories(productUpdateDto.getCategoryIds());
         return productRepository.save(product.updateDetails(productUpdateDto.getName(), productUpdateDto.getDescription(), productUpdateDto.getPrice(), productUpdateDto.getImage(), categories));
     }
 
     @Override
-    public Category createCategory(CategoryCreateDto categoryCreateDto) throws CategoryException {
-        String errorMessage = BeanValidator.isValidCategoryDetails(categoryCreateDto);
-        if (errorMessage != null) {
-            throw new CategoryException(errorMessage);
-        }
+    public Category createCategory(CategoryCreateDto categoryCreateDto) {
         return categoryRepository.save(new Category(categoryCreateDto.getName(), categoryCreateDto.getDescription()));
     }
 
     @Override
     public Category updateCategory(CategoryUpdateDto categoryUpdateDto) throws CategoryException {
-        String errorMessage = BeanValidator.isValidCategoryDetails(categoryUpdateDto);
-        if (errorMessage != null) {
-            throw new CategoryException(errorMessage);
-        }
         Category category = validateCategories(List.of(categoryUpdateDto.getId())).stream().findFirst().orElseThrow(() -> new CategoryException("Category Not Found"));
         return categoryRepository.save(category.updateDetails(categoryUpdateDto.getName(), categoryUpdateDto.getDescription()));
     }

@@ -2,6 +2,7 @@ package com.sample.ecommerce.components;
 
 import com.sample.ecommerce.entities.User;
 import com.sample.ecommerce.entities.UserRole;
+import com.sample.ecommerce.entities.UserStatus;
 import com.sample.ecommerce.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -31,6 +32,7 @@ public class AdminInitializer implements CommandLineRunner {
         try {
             if (!userRepository.existsByUserRole(UserRole.ADMIN)) {
                 User admin = new User(adminName, adminEmail, passwordEncoder.encode(adminPassword), UserRole.ADMIN);
+                admin.setStatus(UserStatus.CREATED);
                 userRepository.save(admin);
                 log.info("Admin Created");
             }

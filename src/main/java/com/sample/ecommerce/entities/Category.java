@@ -13,11 +13,16 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class Category {
+
     @Id
     @Column(name = "category_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, length = 20)
     private String name;
+
+    @Column(nullable = false, length = 200)
     private String description;
 
     public Category(String name, String description) {
