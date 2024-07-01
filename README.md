@@ -68,7 +68,7 @@ To run this project locally, follow these steps:
 
 1. **Clone the repository:**
     ```bash
-    git clone https://github.com/yourusername/SampleEcommerceApplication.git
+    git clone https://github.com/Pruthvik007/SampleEcommerceApplication.git
     cd SampleEcommerceApplication
     ```
 
