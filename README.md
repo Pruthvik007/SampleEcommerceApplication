@@ -84,6 +84,7 @@ To run this project locally, follow these steps:
     JWT_SECRET=your_jwt_secret
     ADMIN_NAME=your_admin_name
     ADMIN_EMAIL=your_admin_email
+    ADMIN_PASSWORD=your_admin_password
     ```
 
 4. **Build and run the application using Docker Compose:**
@@ -102,6 +103,7 @@ The application requires the following environment variables to be set:
 - `JWT_SECRET`: The secret key for JWT token generation.
 - `ADMIN_NAME`: The name of the admin user.
 - `ADMIN_EMAIL`: The email of the admin user.
+- `ADMIN_PASSWORD`: The password of the admin user.
 
 ## Running the Application
 
