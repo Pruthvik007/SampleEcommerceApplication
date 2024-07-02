@@ -41,7 +41,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Transactional
     @Override
-    public Cart createOrUpdateCart(CartDto cartDto) throws ProductException, CartException {
+    public Cart createOrUpdateCart(
+            CartDto cartDto) throws ProductException, CartException {
         String errorMessage = BeanValidator.isValidCartDetails(cartDto);
         if (errorMessage != null) {
             throw new CartException(errorMessage);

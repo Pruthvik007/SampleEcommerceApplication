@@ -42,15 +42,10 @@ public class EcommercePublicController {
     }
 
     @PostMapping("/login")
-    public Response<String> login(@RequestBody UserLoginDto userLoginDto) {
+    public Response<String> login(@RequestBody @Valid UserLoginDto userLoginDto) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(userLoginDto.getEmail(), userLoginDto.getPassword())
         );
         return Response.<String>builder().data(jwtHelper.generateToken(authentication.getName())).status(Response.Status.SUCCESS).build();
-    }
-
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello From Public Route";
     }
 }

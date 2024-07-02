@@ -8,13 +8,14 @@ import com.sample.ecommerce.entities.Category;
 import com.sample.ecommerce.entities.Product;
 import com.sample.ecommerce.exceptions.CategoryException;
 import com.sample.ecommerce.exceptions.ProductException;
-import com.sample.ecommerce.helpers.AppConstants;
 import com.sample.ecommerce.pojos.Response;
 import com.sample.ecommerce.services.EmployeeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/employee")
@@ -40,10 +41,5 @@ public class EmployeeController {
     @PostMapping("update-category")
     public Response<Category> updateCategory(@RequestBody @Valid CategoryUpdateDto categoryUpdateDto) throws CategoryException {
         return Response.<Category>builder().data(employeeService.updateCategory(categoryUpdateDto)).status(Response.Status.SUCCESS).build();
-    }
-
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello Employee From Protected Route";
     }
 }

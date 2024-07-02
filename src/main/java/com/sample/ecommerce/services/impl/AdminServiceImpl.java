@@ -2,6 +2,7 @@ package com.sample.ecommerce.services.impl;
 
 import com.sample.ecommerce.dtos.EmployeeRegisterDto;
 import com.sample.ecommerce.entities.User;
+import com.sample.ecommerce.entities.UserRole;
 import com.sample.ecommerce.entities.UserStatus;
 import com.sample.ecommerce.exceptions.UserException;
 import com.sample.ecommerce.repositories.UserRepository;
@@ -10,7 +11,6 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +22,9 @@ public class AdminServiceImpl implements AdminService {
     @Transactional
     @Override
     public User createEmployee(EmployeeRegisterDto employeeRegisterDto) throws UserException {
+        if (!(UserRole.ADMIN.equals(employeeRegisterDto.getUserRole()) || UserRole.EMPLOYEE.equals(employeeRegisterDto.getUserRole()))) {
+            throw new UserException("Invalid User Role");
+        }
         if (userRepository.findByEmail(employeeRegisterDto.getEmail()).isPresent()) {
             throw new UserException("Employee Already Exists With Given Email");
         }

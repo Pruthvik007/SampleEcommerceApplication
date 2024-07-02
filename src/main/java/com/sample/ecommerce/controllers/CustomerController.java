@@ -41,9 +41,4 @@ public class CustomerController {
     public Response<Order> cancelOrder(@PathVariable("id") Long orderId) throws OrderException {
         return Response.<Order>builder().data(customerService.cancelOrder(orderId)).status(Response.Status.SUCCESS).build();
     }
-
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello Customer From Protected Route";
-    }
 }

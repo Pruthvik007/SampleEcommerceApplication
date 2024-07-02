@@ -2,6 +2,7 @@ package com.sample.ecommerce.dtos;
 
 import com.sample.ecommerce.entities.UserRole;
 import jakarta.validation.constraints.NotNull;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -9,6 +10,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class EmployeeRegisterDto extends UserRegisterDto {
     @NotNull(message = "User Role is Required")
     private UserRole userRole;

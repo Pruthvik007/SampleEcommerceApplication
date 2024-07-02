@@ -2,6 +2,7 @@ package com.sample.ecommerce.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -9,6 +10,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class UserRegisterDto extends UserLoginDto {
 
     @NotBlank(message = "User Name is Required")
