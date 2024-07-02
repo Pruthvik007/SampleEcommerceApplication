@@ -29,6 +29,8 @@ This is a Spring Boot application designed to manage an ecommerce platform. It i
 - JWT (JSON Web Tokens)
 - Lombok
 - MySQL
+- JUnit
+- Mockito
 
 ## Concepts Used
 
@@ -39,6 +41,7 @@ This is a Spring Boot application designed to manage an ecommerce platform. It i
 * ### Pagination
 * ### Exception Handling
 * ### Validation
+* ### Unit Testing
 
 ## Public Functionalities
 
