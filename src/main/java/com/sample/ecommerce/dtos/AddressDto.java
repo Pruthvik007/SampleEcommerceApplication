@@ -2,11 +2,13 @@ package com.sample.ecommerce.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
 public class AddressDto {
     @Size(min = 3, max = 20, message = "Title must be between 3 and 20 characters")
     @NotBlank(message = "Title is Required")

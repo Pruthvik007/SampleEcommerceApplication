@@ -35,7 +35,7 @@ class AdminControllerTest {
 
     private MockMvc mockMvc;
 
-    private static ObjectMapper objectMapper;
+    private static ObjectMapper objectMapper = new ObjectMapper();
     private static GlobalExceptionHandler globalExceptionHandler = new GlobalExceptionHandler();
     private static LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
 
@@ -52,7 +52,6 @@ class AdminControllerTest {
                 .setControllerAdvice(globalExceptionHandler)
                 .setValidator(validator)
                 .build();
-        objectMapper = new ObjectMapper();
     }
 
     @Test
