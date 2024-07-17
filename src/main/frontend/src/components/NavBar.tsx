@@ -5,7 +5,10 @@ import ThemeToggle from "./common/ThemeToggle";
 import CrossIcon from "../assets/svg-icons/CrossIcon";
 import MenuIcon from "../assets/svg-icons/MenuIcon";
 
-const navItems : [{label:string,to:string}] = [{label:"Home",to:"/"}];
+const navItems: { label: string; to: string }[] = [
+  { label: "View Profile", to: "/profile" },
+  { label: "Logout", to: "/logout" },
+];
 const Navbar = () => {
   const [isVisible, setIsVisible] = useState(false);
   const toggleNav = () => {

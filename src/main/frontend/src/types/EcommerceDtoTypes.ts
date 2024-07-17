@@ -5,6 +5,7 @@ export interface UserLoginDto {
 
 export interface UserRegisterDto extends UserLoginDto {
   name: string;
+  confirmPassword: string;
 }
 
 export interface EmployeeRegisterDto extends UserRegisterDto {

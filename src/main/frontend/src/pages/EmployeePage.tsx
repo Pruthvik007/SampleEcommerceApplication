@@ -1,5 +1,11 @@
+import AddProduct from "../components/AddProduct";
+
 const EmployeePage = () => {
-  return <div>EmployeePage</div>;
+  return (
+    <div>
+      <AddProduct />
+    </div>
+  );
 };
 
 export default EmployeePage;
