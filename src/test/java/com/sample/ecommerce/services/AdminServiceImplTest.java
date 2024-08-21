@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class AdminServiceImplTest {
+class AdminServiceImplTest {
 
     public static final String testName = "Test Name";
     public static final String testMail = "test@mail.com";
@@ -38,7 +38,7 @@ public class AdminServiceImplTest {
 
     @Test
     @DisplayName("Successfully Create a New Employee when Valid Data is Provided")
-    public void testCreateEmployeeWithValidDetails() throws UserException {
+    void testCreateEmployeeWithValidDetails() throws UserException {
         EmployeeRegisterDto employeeRegisterDto = new EmployeeRegisterDto(testName, testMail, testPassword, UserRole.EMPLOYEE);
         when(userRepository.findByEmail(employeeRegisterDto.getEmail())).thenReturn(Optional.empty());
         when(passwordEncoder.encode(employeeRegisterDto.getPassword())).thenReturn(testHashedPassword);
@@ -58,7 +58,7 @@ public class AdminServiceImplTest {
 
     @Test
     @DisplayName("Test to Create Employee With Existing Email")
-    public void testCreateEmployeeWithExistingEmail() {
+    void testCreateEmployeeWithExistingEmail() {
         EmployeeRegisterDto employeeRegisterDto = new EmployeeRegisterDto(testName, testMail, testPassword, UserRole.EMPLOYEE);
         when(userRepository.findByEmail(employeeRegisterDto.getEmail())).thenReturn(Optional.of(new User()));
         UserException exception = assertThrows(UserException.class, () -> {
@@ -69,7 +69,7 @@ public class AdminServiceImplTest {
 
     @Test
     @DisplayName("Test to Create Employee With Invalid Role")
-    public void testCreateEmployeeWithInvalidRole() {
+    void testCreateEmployeeWithInvalidRole() {
         EmployeeRegisterDto employeeRegisterDto = new EmployeeRegisterDto(testName, testMail, testPassword, UserRole.CUSTOMER);
         UserException exception = assertThrows(UserException.class, () -> {
             adminService.createEmployee(employeeRegisterDto);
@@ -79,7 +79,7 @@ public class AdminServiceImplTest {
 
     @Test
     @DisplayName("Test to Check if Password is correctly encoded Before saving the Employee")
-    public void testPasswordEncoding() throws UserException {
+    void testPasswordEncoding() throws UserException {
         EmployeeRegisterDto employeeRegisterDto = new EmployeeRegisterDto(testName, testMail, testPassword, UserRole.ADMIN);
         User savedUser = new User(testName, testMail, testHashedPassword, UserRole.ADMIN);
         savedUser.setStatus(UserStatus.CREATED);
@@ -95,7 +95,7 @@ public class AdminServiceImplTest {
 
     @Test
     @DisplayName("Test Employee Status is set to CREATED upon Successful Creation")
-    public void testEmployeeStatusCreatedOnCreation() {
+    void testEmployeeStatusCreatedOnCreation() {
         EmployeeRegisterDto employeeRegisterDto = new EmployeeRegisterDto(testName, testMail, testPassword, UserRole.ADMIN);
         User employee = new User(testName, testMail, testPassword, UserRole.ADMIN);
         employee.setStatus(UserStatus.CREATED);
